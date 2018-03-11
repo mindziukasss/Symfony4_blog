@@ -19,9 +19,6 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/PostController.php',
-        ]);
+        return $this->render('post/index.html.twig');
     }
 }
