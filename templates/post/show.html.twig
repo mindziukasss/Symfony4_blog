@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">{{ post.title }}</h1>
+    <img class="card-img-top" src="{{ asset('uploads/') ~ post.image }}">
+    <div class="card-block">
+        <p class="card-text"> {{ post.description }}.</p>
+        <a href="{{ path('postsindex') }}" class="btn btn-primary">Back</a>
+    </div>
+{% endblock %}
