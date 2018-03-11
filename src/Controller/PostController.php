@@ -24,7 +24,13 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('post/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository(Post::class);
+
+        $posts = $repository->findAll();
+
+        return $this->render('post/index.html.twig', compact('posts'));
     }
 
     /**
