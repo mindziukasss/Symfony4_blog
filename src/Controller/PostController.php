@@ -127,7 +127,25 @@ class PostController extends Controller
             'form_edit_post' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em
+            ->getRepository(Post::class)
+            ->find($id);
+        $em->remove($post);
+        $em->flush();
+        return $this->redirectToRoute('postsindex');
 
     }
+
+
 
 }

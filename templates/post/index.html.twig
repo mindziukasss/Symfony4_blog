@@ -17,6 +17,7 @@
                         <p class="card-text"> {{ post.description[0:50] }}...</p>
                         <a href="{{ post.id }}" class="btn btn-info">Read more</a>
                         <a href="edit/{{ post.id }}" class="btn btn-primary">Edit</a>
+                        <a href="delete/{{ post.id }}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             {% endfor %}
