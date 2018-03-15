@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Create new posts {% endblock %}
+{% block title %} Edit post {% endblock %}
 
 {% block body %}
-    {{ form(form_new_post) }}
+    {{ form(form_edit_post) }}
     <a href="{{ path('postsindex') }}" class="btn btn-primary">Back</a>
 {% endblock %}
