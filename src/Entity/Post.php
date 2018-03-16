@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\Table(name="posts")
+ * @ORM\HasLifecycleCallbacks
  */
 class Post
 {
@@ -36,6 +38,20 @@ class Post
      * Assert\File(mimeTypes={"image/jpg"})
      */
     private $image;
+
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updated_at;
+
 
     /**
      * @return mixed
@@ -99,5 +115,43 @@ class Post
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     *  Get updated_at
+     *
+     * @return DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set updated_at
+     * @ORM\PrePersist
+     */
+    public function setUpdatedAt()
+    {
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     *  Get created_at
+     *
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set created_at
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt()
+    {
+        $this->created_at = new \DateTime();
     }
 }
