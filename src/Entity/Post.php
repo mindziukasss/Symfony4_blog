@@ -27,7 +27,7 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="string", name="description")
+     * @ORM\Column(type="string", name="description", length=5000)
      * @var string
      */
     private $description;

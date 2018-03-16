@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine();
 
         $repository = $em->getRepository(Post::class);
 
