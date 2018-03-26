@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class PostController
  * @package App\Controller
- * @Route("/posts", name="posts")
+ * @Route("/", name="posts")
  */
 class PostController extends Controller
 {
@@ -70,7 +70,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("posts/{id}", name="show")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -80,7 +80,6 @@ class PostController extends Controller
         $post = $this->getDoctrine()
             ->getRepository(Post::class)
             ->find($id);
-
         return $this->render('post/show.html.twig', [
             'post' => $post,
         ]);

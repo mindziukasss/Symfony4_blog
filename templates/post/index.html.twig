@@ -15,7 +15,7 @@
                     <div class="card-block">
                         <h4 class="card-title">{{ post.title }}</h4>
                         <p class="card-text"> {{ post.description[0:50] }}...</p>
-                        <a href="{{ post.id }}" class="btn btn-info">Read more</a>
+                        <a href="posts/{{ post.id }}" class="btn btn-info">Read more</a>
                         <a href="edit/{{ post.id }}" class="btn btn-primary">Edit</a>
                         <a href="delete/{{ post.id }}" class="btn btn-danger">Delete</a>
                     </div>
