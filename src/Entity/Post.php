@@ -52,6 +52,29 @@ class Post
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var integer
+     */
+    private $user_id;
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId(User $user_id)
+    {
+        $this->user_id = $user_id;
+    }
 
     /**
      * @return mixed
