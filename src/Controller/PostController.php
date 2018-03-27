@@ -23,10 +23,10 @@ class PostController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine();
-
         $repository = $em->getRepository(Post::class);
 
         $posts = $repository->findAll();
+
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts
@@ -38,6 +38,7 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
+        $user_id = $this->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
         $post = new Post();
 
@@ -58,9 +59,13 @@ class PostController extends Controller
                 $this->getParameter('images_directory'),
                 $fileName
             );
+            $post->setUserId($user_id);
             $post->setImage($fileName);
             $em->persist($post);
             $em->flush();
+
+//            var_dump($post);
+//            die;
             return $this->redirect($this->generateUrl('postsindex'));
         }
         return $this->render('post/new.html.twig', [

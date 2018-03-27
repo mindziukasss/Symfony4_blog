@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <h1 class="text-center">All posts</h1>
     {% if is_granted('ROLE_USER') %}
         <a href="{{ path('postscreate') }}" class="btn btn-success">New post</a>
@@ -16,7 +17,7 @@
                         <h4 class="card-title">{{ post.title }}</h4>
                         <p class="card-text"> {{ post.description[0:50] }}...</p>
                         <a href="posts/{{ post.id }}" class="btn btn-info">Read more</a>
-                        {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('ROLE_USER') and app.user.id == post.userId  %}
                             <a href="edit/{{ post.id }}" class="btn btn-primary">Edit</a>
                             <a href="delete/{{ post.id }}" class="btn btn-danger">Delete</a>
                         {% endif %}
