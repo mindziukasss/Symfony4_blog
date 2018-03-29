@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class PostController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index",  methods={"GET"})
      */
     public function indexAction()
     {
@@ -64,8 +64,6 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
 
-//            var_dump($post);
-//            die;
             return $this->redirect($this->generateUrl('postsindex'));
         }
         return $this->render('post/new.html.twig', [
@@ -75,7 +73,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("posts/{id}", name="show")
+     * @Route("posts/{id}", name="show", methods={"GET"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -98,10 +96,18 @@ class PostController extends Controller
      */
     public function editAction($id, Request $request)
     {
+        $userId = $this->getUser()->getId();
+
+
         $em = $this->getDoctrine()->getManager();
         $post = $em
             ->getRepository(Post::class)
             ->find($id);
+
+        if ($post->getUserId() != $userId) {
+            return $this->redirect($this->generateUrl('postsindex'));
+        }
+
         if (!$post) {
             throw $this->createNotFoundException(
                 'No product found for id ' . $id
@@ -140,16 +146,21 @@ class PostController extends Controller
      */
     public function deleteAction($id)
     {
+        $userId = $this->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
         $post = $em
             ->getRepository(Post::class)
             ->find($id);
+
+        if ($post->getUserId() != $userId) {
+            return $this->redirect($this->generateUrl('postsindex'));
+        }
+
         $em->remove($post);
         $em->flush();
         return $this->redirectToRoute('postsindex');
 
     }
-
 
 
 }

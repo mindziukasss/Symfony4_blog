@@ -10,8 +10,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: ~
-            logout: ~
+            pattern: ^/
+            form_login:
+            provider: fos_userbundle
+            logout: true
+            anonymous: true
 
 
             # activate different ways to authenticate
@@ -34,5 +37,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/edit/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/create, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/delete/, role: IS_AUTHENTICATED_FULLY }
